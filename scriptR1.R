@@ -66,32 +66,85 @@ legend("topleft",
 #grafico 3 experiencia 4
 hoja2<-read_excel("grafica1.xlsx",sheet="grafica2")
 
-reg<-lm(Brix~Tiempo,data=hoja1)
-ordenada<-round(reg$coefficients[1],3)
-pendiente<-round(reg$coefficients[2],3)
-summary(reg)
+reg3<-lm(Brix~Tiempo,data=hoja2)
+ordenada3<-round(reg3$coefficients[1],3)
+pendiente3<-round(reg3$coefficients[2],3)
+summary(reg3)
 dev.new()
-plot(hoja1$Tiempo,
-     hoja1$Brix,
+plot(hoja2$Tiempo,
+     hoja2$Brix,
      main="Solidos",
      xlab="Tiempo (min)",
      ylab="°Brix",
-     xlim=c(min(hoja1$Tiempo),max(hoja1$Tiempo)),
-     ylim=c(min(hoja1$Brix),max(hoja1$Brix)),
+     xlim=c(min(hoja2$Tiempo),max(hoja2$Tiempo)),
+     ylim=c(min(hoja2$Brix),max(hoja2$Brix)),
      pch=20,
      col="black",
      panel.first = grid())
-recta<-pendiente*(min(hoja1$Tiempo):max(hoja1$Tiempo))+ordenada
-lines(min(hoja1$Tiempo):max(hoja1$Tiempo),recta,
+recta3<-pendiente3*(min(hoja2$Tiempo):max(hoja2$Tiempo))+ordenada3
+lines(min(hoja2$Tiempo):max(hoja2$Tiempo),recta3,
       type="l",
       col="blue",
       lwd=2)
 legend("topleft",
        paste0("°Brix =",
-              pendiente ,
+              pendiente3 ,
               "t + ",
-              ordenada,
+              ordenada3,
               "  R^2 ajust= ",
               round(summary(reg)$adj.r.squared,3)),
+       col="blue",
+       lwd=2)
+
+#Grafica 4: Experienca 4
+reg4<-lm(ART~Tiempo,data=hoja2)
+ordenada4<-round(reg4$coefficients[1],3)
+pendiente4<-round(reg4$coefficients[2],3)
+summary(reg4)
+dev.new()
+plot(hoja2$Tiempo,
+     hoja2$ART,
+     main="Solidos",
+     xlab="Tiempo (min)",
+     ylab="ART (g/L)",
+     xlim=c(min(hoja2$Tiempo),max(hoja2$Tiempo)),
+     ylim=c(min(hoja2$ART),max(hoja2$ART)),
+     pch=20,
+     col="black",
+     panel.first = grid())
+recta2<-pendiente4*(min(hoja2$Tiempo):max(hoja2$Tiempo))+ordenada4
+lines(min(hoja2$Tiempo):max(hoja2$Tiempo),recta2,
+      type="l",
+      col="blue",
+      lwd=2)
+legend("topleft",
+       paste0("ART (g/L) =",pendiente4 ,"t + ",ordenada4,"  R^2 ajust= ",
+              round(summary(reg4)$adj.r.squared,3)),
+       col="blue",
+       lwd=2)
+#grafico 6 exp 4 hoja2
+reg6<-lm(ART~Brix,data=hoja2)
+ordenada6<-round(reg6$coefficients[1],3)
+pendiente6<-round(reg6$coefficients[2],3)
+summary(reg6)
+dev.new()
+plot(hoja2$Brix,
+     hoja2$ART,
+     main="Solidos",
+     xlab="°Brix",
+     ylab="ART (g/L)",
+     xlim=c(min(hoja2$Brix),max(hoja2$Brix)),
+     ylim=c(min(hoja2$ART),max(hoja2$ART)),
+     pch=20,
+     col="black",
+     panel.first = grid())
+recta6<-pendiente6*(min(hoja2$Brix):max(hoja2$Brix))+ordenada6
+lines(min(hoja2$Brix):max(hoja2$Brix),recta6,
+      type="l",
+      col="blue",
+      lwd=2)
+legend("topleft",
+       paste0("ART (g/L) =",pendiente6 ,"°Brix + ",ordenada6,"  R^2 ajust= ",
+              round(summary(reg6)$adj.r.squared,3)),
        col="blue",
        lwd=2)
